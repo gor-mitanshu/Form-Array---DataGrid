@@ -24,8 +24,8 @@ const DataGrids = () => {
   const [products, setProducts] = useState([]);
   const [newField, setNewField] = useState([
     {
-      //   name: "",
-      //   description: "",
+      name: "",
+      description: "",
       vendors: [
         {
           venderName: "",
