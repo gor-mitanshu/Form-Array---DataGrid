@@ -76,7 +76,7 @@ const UserModal = ({ isOpen, onClose }) => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "80%",
+          width: "60%",
           bgcolor: "background.paper",
           border: "2px solid",
           boxShadow: 24,
@@ -89,7 +89,7 @@ const UserModal = ({ isOpen, onClose }) => {
         </Typography>
         <div
           style={{
-            maxHeight: "550px",
+            maxHeight: "590px",
             overflowY: "auto",
           }}
         >
@@ -102,12 +102,12 @@ const UserModal = ({ isOpen, onClose }) => {
               <Form>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
-                    <TextField
-                      fullWidth
-                      label={"Name"}
-                      placeholder="Please Enter Your Name"
-                      id="name"
+                    <Field
                       name="name"
+                      as={TextField}
+                      fullWidth
+                      label="Name"
+                      placeholder="Please Enter Your Name"
                     />
                     {touched.name && errors.name && (
                       <div className="error" style={{ color: "red" }}>
@@ -116,12 +116,12 @@ const UserModal = ({ isOpen, onClose }) => {
                     )}
                   </Grid>
                   <Grid item xs={6}>
-                    <TextField
-                      fullWidth
-                      label={"Description"}
-                      placeholder="Please Enter Your Description"
-                      id="description"
+                    <Field
                       name="description"
+                      as={TextField}
+                      fullWidth
+                      label="Description"
+                      placeholder="Please Enter Your Description"
                     />
                     {touched.description && errors.description && (
                       <div className="error" style={{ color: "red" }}>
@@ -156,10 +156,11 @@ const UserModal = ({ isOpen, onClose }) => {
                               )}
                               <Grid container spacing={2}>
                                 <Grid item xs={6}>
-                                  <TextField
+                                  <Field
+                                    name={`vendors[${index}].venderName`}
+                                    as={TextField}
                                     fullWidth
                                     placeholder="Vendor's Name"
-                                    name={`vendors[${index}].venderName`}
                                   />
                                   {touched.vendors &&
                                     touched.vendors[index] &&
@@ -178,8 +179,8 @@ const UserModal = ({ isOpen, onClose }) => {
                                 <Grid item xs={6}>
                                   <FormControl sx={{ width: "100%" }}>
                                     <Field
-                                      as={RadioGroup}
                                       name={`vendors[${index}].ismain`}
+                                      as={RadioGroup}
                                     >
                                       <FormControlLabel
                                         value={!vendor.ismain}
@@ -209,8 +210,8 @@ const UserModal = ({ isOpen, onClose }) => {
                                             <FormControl sx={{ width: "100%" }}>
                                               <InputLabel>Variant</InputLabel>
                                               <Field
-                                                as={Select}
                                                 name={`vendors[${index}].variants[${vIndex}].varient`}
+                                                as={Select}
                                               >
                                                 <MenuItem value={"L"}>
                                                   L
@@ -256,11 +257,12 @@ const UserModal = ({ isOpen, onClose }) => {
                                             </FormControl>
                                           </Grid>
                                           <Grid item xs={4}>
-                                            <TextField
+                                            <Field
+                                              name={`vendors[${index}].variants[${vIndex}].number`}
+                                              as={TextField}
                                               fullWidth
                                               type="number"
                                               placeholder="Number"
-                                              name={`vendors[${index}].variants[${vIndex}].number`}
                                             />
                                             {touched.vendors &&
                                               touched.vendors[index] &&
