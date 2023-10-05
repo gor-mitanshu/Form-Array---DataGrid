@@ -5,7 +5,6 @@ import { Grid } from "@mui/material";
 
 const MainDataGrid = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 

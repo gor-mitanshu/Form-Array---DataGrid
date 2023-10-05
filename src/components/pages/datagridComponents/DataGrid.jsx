@@ -3,12 +3,15 @@ import { DataGrid, GridActionsCellItem, GridToolbar } from "@mui/x-data-grid";
 import { Box, Typography, Button } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import axios from "axios";
+import EditUserModal from "./EditUserModal";
 
 const DataGridComponent = ({ openModal }) => {
   const [products, setProducts] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
-    async function getUser() {
+    async function getUsers() {
       try {
         const res = await axios.get(`${process.env.REACT_APP_API}`);
         if (!!res) {
@@ -18,7 +21,7 @@ const DataGridComponent = ({ openModal }) => {
         console.log(error.message);
       }
     }
-    getUser();
+    getUsers();
   }, []);
 
   const columns = [
@@ -59,10 +62,24 @@ const DataGridComponent = ({ openModal }) => {
           icon={<Delete color={"error"} />}
           label="Delete"
         />,
-        <GridActionsCellItem icon={<Edit color="info" />} label="Edit" />,
+        <GridActionsCellItem
+          icon={<Edit color="info" />}
+          label="Edit"
+          onClick={() => handleEditClick(params.row)}
+        />,
       ],
     },
   ];
+
+  const handleEditClick = (user) => {
+    setSelectedUser(user); // Set the selected user for editing
+    setIsEditModalOpen(true); // Open the edit modal
+  };
+
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false); // Close the edit modal
+    setSelectedUser(null); // Clear the selected user
+  };
 
   return (
     <div>
@@ -106,6 +123,11 @@ const DataGridComponent = ({ openModal }) => {
           />
         </Box>
       </div>
+      <EditUserModal
+        user={selectedUser}
+        isOpen={isEditModalOpen}
+        onClose={handleCloseEditModal}
+      />
     </div>
   );
 };

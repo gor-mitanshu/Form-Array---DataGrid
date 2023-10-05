@@ -6,11 +6,16 @@
   height: 80px !important;
 }
 .layout-sidebar {
-  width: 5% !important;
+  width: 280px;
   min-width: 220px !important;
   max-width: 260px !important;
   transition: 0.5s !important;
   transition-timing-function: ease !important;
+  background: #fff !important;
+  color: black !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.2) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
+  overflow-y: auto;
 }
 @media (max-width: 600px) {
   .layout-sidebar {

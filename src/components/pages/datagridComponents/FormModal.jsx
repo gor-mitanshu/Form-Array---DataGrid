@@ -82,7 +82,8 @@ const UserModal = ({ isOpen, onClose }) => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "60%",
+          width: "90%",
+          maxWidth: "600px",
           bgcolor: "background.paper",
           border: "2px solid",
           boxShadow: 24,
@@ -107,7 +108,7 @@ const UserModal = ({ isOpen, onClose }) => {
             {({ values, errors, touched }) => (
               <Form>
                 <Grid container spacing={2}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <Field
                       name="name"
                       as={TextField}
@@ -121,7 +122,7 @@ const UserModal = ({ isOpen, onClose }) => {
                       </div>
                     )}
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <Field
                       name="description"
                       as={TextField}
@@ -161,7 +162,7 @@ const UserModal = ({ isOpen, onClose }) => {
                                 </Grid>
                               )}
                               <Grid container spacing={2}>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} sm={6}>
                                   <Field
                                     name={`vendors[${index}].venderName`}
                                     as={TextField}
@@ -182,7 +183,7 @@ const UserModal = ({ isOpen, onClose }) => {
                                       </div>
                                     )}
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} sm={6}>
                                   <FormControl sx={{ width: "100%" }}>
                                     <Field
                                       name={`vendors[${index}].ismain`}
@@ -216,7 +217,7 @@ const UserModal = ({ isOpen, onClose }) => {
                                         }}
                                       >
                                         <Grid container spacing={2}>
-                                          <Grid item xs={4}>
+                                          <Grid item xs={12} sm={4}>
                                             <FormControl sx={{ width: "100%" }}>
                                               <InputLabel>Variant</InputLabel>
                                               <Field
@@ -266,7 +267,7 @@ const UserModal = ({ isOpen, onClose }) => {
                                                 )}
                                             </FormControl>
                                           </Grid>
-                                          <Grid item xs={4}>
+                                          <Grid item xs={12} sm={4}>
                                             <Field
                                               name={`vendors[${index}].variants[${vIndex}].number`}
                                               as={TextField}
@@ -303,7 +304,7 @@ const UserModal = ({ isOpen, onClose }) => {
                                                 </div>
                                               )}
                                           </Grid>
-                                          <Grid item xs={4}>
+                                          <Grid item xs={12} sm={4}>
                                             {vIndex > 0 && (
                                               <IconButton
                                                 type="button"
