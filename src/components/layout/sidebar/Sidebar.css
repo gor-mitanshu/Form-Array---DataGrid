@@ -1,5 +1,4 @@
 .sidebar {
-  /* width: 220px !important; */
   height: 100%;
   background: #fff !important;
   color: black !important;
@@ -7,8 +6,6 @@
   overflow-x: hidden !important;
   overflow-y: auto !important;
   color: black !important;
-  border-right: 1px solid black !important;
-  border-bottom: 1px solid black !important;
 }
 .sidebar-icon {
   color: black;
@@ -22,12 +19,6 @@
   color: black;
   font-weight: 800;
 }
-/* .logout:hover {
-  cursor: pointer;
-  background-color: #ee6b6e;
-  color: black;
-  font-weight: 900;
-} */
 .sidebar-listitem-btn {
   padding: 12px !important;
 }

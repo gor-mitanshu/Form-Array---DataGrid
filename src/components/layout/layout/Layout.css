@@ -1,37 +1,16 @@
 .layout {
   display: flex !important;
   height: 100vh !important;
-  overflow: hidden; /* Add this to hide any overflowing content */
 }
 .layout-navbar {
-  /* height: 80px !important; */
-  flex-grow: 1;
+  height: 80px !important;
 }
 .layout-sidebar {
-  /* width: 15% !important;
-  min-width: 220px !important;
-  max-width: 260px !important;
-  transition: 0.5s !important;
-  transition-timing-function: ease !important; */
-
-  width: 280px; /* Set your desired width */
+  width: 5% !important;
   min-width: 220px !important;
   max-width: 260px !important;
   transition: 0.5s !important;
   transition-timing-function: ease !important;
-  background: #fff !important;
-  color: black !important;
-  border-right: 1px solid black !important;
-  border-bottom: 1px solid black !important;
-  overflow-y: auto; /* Add this to enable scrolling within the sidebar */
-}
-
-.layout-sidebar-sm {
-  max-width: 48px !important;
-  min-width: 48px !important;
-  transition: min-width 0.5s !important;
-  transition-timing-function: ease !important;
-  overflow: hidden !important;
 }
 @media (max-width: 600px) {
   .layout-sidebar {

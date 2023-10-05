@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/layout/Layout";
 // import DataGrids from "./components/pages/DataGrid";
 // import IDataGrid from "./components/pages/UserDataGrid";
-import MainDataGrid from "./components/pages/Main";
+import MainDataGrid from "./components/pages/MainComponent";
 
 function App () {
   return (

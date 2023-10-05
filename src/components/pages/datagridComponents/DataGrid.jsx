@@ -1,5 +1,3 @@
-// DataGridComponent.js
-
 import React, { useEffect, useState } from "react";
 import { DataGrid, GridActionsCellItem, GridToolbar } from "@mui/x-data-grid";
 import { Box, Typography, Button } from "@mui/material";

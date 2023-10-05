@@ -10,7 +10,7 @@ const Layout = () => {
   return (
     <div>
       <Grid className="layout">
-        <Grid>
+        <Grid className="layout-sidebar">
           <SideBar />
         </Grid>
         <Grid className="layout-navbar">

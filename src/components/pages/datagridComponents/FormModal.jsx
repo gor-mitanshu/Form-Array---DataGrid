@@ -189,7 +189,7 @@ const UserModal = ({ isOpen, onClose }) => {
                                       as={RadioGroup}
                                     >
                                       <FormControlLabel
-                                        value={!vendor.ismain}
+                                        value={true}
                                         control={<Radio />}
                                         label="Is Main"
                                         onClick={() =>

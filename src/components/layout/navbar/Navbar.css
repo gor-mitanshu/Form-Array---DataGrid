@@ -12,7 +12,6 @@
 .toolbar-navbar {
   padding: 0;
   padding-left: 12px !important;
-  /* background-image: url(https://cdn.pixabay.com/photo/2017/03/11/20/51/bubbles-2135831_1280.jpg); */
   position: relative;
   color: #fff;
 }
@@ -34,16 +33,6 @@
   font-size: 26px !important;
   z-index: 1;
 }
-/* .navbar-name {
-  margin: 4px !important;
-  font-weight: 700 !important;
-  font-size: 20px !important;
-  z-index: 1 !important;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid white !important;
-  border-radius: 6px !important;
-  padding: 6px !important;
-} */
 
 @media (max-width: 600px) {
   .menu-icon {
@@ -51,13 +40,5 @@
   }
   .navbar-title {
     font-size: 22px !important;
-  }
-  .navbar-name {
-    font-size: 15px !important;
-  }
-}
-@media (max-width: 350px) {
-  .navbar-name {
-    display: none !important;
   }
 }
