@@ -1,14 +1,13 @@
 import React from "react";
-
 import {
   Grid,
   TextField,
   IconButton,
   Button,
+  FormControl,
   FormControlLabel,
   Radio,
   RadioGroup,
-  FormControl,
   InputLabel,
   Select,
   MenuItem,
@@ -68,7 +67,7 @@ const UserModal = ({ isOpen, onClose }) => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "60%",
+          width: "80%",
           bgcolor: "background.paper",
           border: "2px solid",
           boxShadow: 24,
@@ -123,13 +122,23 @@ const UserModal = ({ isOpen, onClose }) => {
                             width={"100%"}
                             my={2}
                             p={2}
+                            position="relative"
                           >
+                            {index > 0 && (
+                              <IconButton
+                                type="button"
+                                color="primary"
+                                onClick={() => remove(index)}
+                                sx={{ position: "absolute", top: 0, right: 0 }}
+                              >
+                                <Delete />
+                              </IconButton>
+                            )}
                             <Grid container spacing={2}>
                               <Grid item xs={6}>
                                 <TextField
                                   fullWidth
-                                  label={"Vendor's Name"}
-                                  placeholder="Please Enter Vendor's Name"
+                                  placeholder="Vendor's Name"
                                   name={`vendors[${index}].venderName`}
                                 />
                                 {touched.vendors &&
@@ -144,7 +153,7 @@ const UserModal = ({ isOpen, onClose }) => {
                                   )}
                               </Grid>
                               <Grid item xs={4}>
-                                <FormControl>
+                                <FormControl sx={{ width: "100%" }}>
                                   <Field
                                     as={RadioGroup}
                                     name={`vendors[${index}].ismain`}
@@ -158,7 +167,7 @@ const UserModal = ({ isOpen, onClose }) => {
                                 </FormControl>
                               </Grid>
                               <Grid item xs={4}>
-                                <FormControl>
+                                <FormControl sx={{ width: "100%" }}>
                                   <InputLabel>Variant</InputLabel>
                                   <Field
                                     as={Select}
@@ -168,24 +177,23 @@ const UserModal = ({ isOpen, onClose }) => {
                                     <MenuItem value={"XL"}>XL</MenuItem>
                                     <MenuItem value={"XXL"}>XXL</MenuItem>
                                   </Field>
+                                  {touched.vendors &&
+                                    touched.vendors[index] &&
+                                    touched.vendors[index].varient &&
+                                    errors.vendors &&
+                                    errors.vendors[index] &&
+                                    errors.vendors[index].varient && (
+                                      <div className="error">
+                                        {errors.vendors[index].varient}
+                                      </div>
+                                    )}
                                 </FormControl>
-                                {touched.vendors &&
-                                  touched.vendors[index] &&
-                                  touched.vendors[index].varient &&
-                                  errors.vendors &&
-                                  errors.vendors[index] &&
-                                  errors.vendors[index].varient && (
-                                    <div className="error">
-                                      {errors.vendors[index].varient}
-                                    </div>
-                                  )}
                               </Grid>
                               <Grid item xs={4}>
                                 <TextField
                                   fullWidth
                                   type="number"
-                                  label={"Number"}
-                                  placeholder="Please Enter Number"
+                                  placeholder="Number"
                                   name={`vendors[${index}].number`}
                                 />
                                 {touched.vendors &&
@@ -199,26 +207,9 @@ const UserModal = ({ isOpen, onClose }) => {
                                     </div>
                                   )}
                               </Grid>
-                              <Grid item xs={4}>
-                                <IconButton
-                                  type="button"
-                                  color="primary"
-                                  onClick={() => remove(index)}
-                                >
-                                  <Delete />
-                                </IconButton>
-                              </Grid>
                             </Grid>
                           </Box>
                         ))}
-                        <Grid container justifyContent={"flex-end"}>
-                          <Button type="button" onClick={onClose}>
-                            Cancel
-                          </Button>
-                          <Button type="submit" variant="contained">
-                            Submit
-                          </Button>
-                        </Grid>
                         <IconButton
                           type="button"
                           color="primary"
@@ -233,6 +224,20 @@ const UserModal = ({ isOpen, onClose }) => {
                         >
                           <Add />
                         </IconButton>
+                        <Grid container justifyContent={"center"}>
+                          <Button
+                            type="button"
+                            variant="contained"
+                            color="error"
+                            onClick={onClose}
+                            sx={{ marginRight: "8px" }}
+                          >
+                            Cancel
+                          </Button>
+                          <Button type="submit" variant="contained">
+                            Submit
+                          </Button>
+                        </Grid>
                       </div>
                     )}
                   </FieldArray>
