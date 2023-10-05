@@ -1,3 +1,13 @@
 .error {
   color: "red";
 }
+/* .css-128fb87-MuiDataGrid-toolbarContainer {
+  background: rgb(0, 0, 0, 0.7) !important;
+}
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root {
+  color: white !important;
+} */
+.header {
+  background: black !important;
+  color: white !important;
+}

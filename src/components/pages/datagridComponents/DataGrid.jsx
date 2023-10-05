@@ -32,12 +32,14 @@ const DataGridComponent = ({ openModal }) => {
     {
       field: "description",
       headerName: "Description",
+      headerClassName: "header",
       flex: 1,
       description: "Description",
     },
     {
       field: "vendor",
       headerName: "Vendor",
+      headerClassName: "header",
       flex: 1,
       description: "Vendor",
       valueGetter: (body) => {
@@ -48,6 +50,7 @@ const DataGridComponent = ({ openModal }) => {
     {
       field: "actions",
       headerName: "Actions",
+      headerClassName: "header",
       description: "Actions",
       flex: 1,
       type: "actions",
