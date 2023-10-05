@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   TextField,
@@ -21,13 +21,15 @@ import { Field, FieldArray, Form, Formik } from "formik";
 import "./DataGrid.css";
 
 const UserModal = ({ isOpen, onClose }) => {
+  const [selectedVendorIndex, setSelectedVendorIndex] = useState(null);
+
   const initialValues = {
     name: "",
     description: "",
     vendors: [
       {
         venderName: "",
-        ismain: false,
+        ismain: true,
         variants: [
           {
             varient: "",
@@ -61,6 +63,10 @@ const UserModal = ({ isOpen, onClose }) => {
   const handleSubmit = (values) => {
     console.log("Form values:", values);
     onClose();
+  };
+
+  const handleVendorSelection = (index) => {
+    setSelectedVendorIndex(index);
   };
 
   return (
@@ -186,6 +192,10 @@ const UserModal = ({ isOpen, onClose }) => {
                                         value={!vendor.ismain}
                                         control={<Radio />}
                                         label="Is Main"
+                                        onClick={() =>
+                                          handleVendorSelection(index)
+                                        }
+                                        checked={selectedVendorIndex === index}
                                       />
                                     </Field>
                                   </FormControl>
