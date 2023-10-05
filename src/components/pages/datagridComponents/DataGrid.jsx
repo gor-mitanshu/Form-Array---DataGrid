@@ -72,13 +72,13 @@ const DataGridComponent = ({ openModal }) => {
   ];
 
   const handleEditClick = (user) => {
-    setSelectedUser(user); // Set the selected user for editing
-    setIsEditModalOpen(true); // Open the edit modal
+    setSelectedUser(user);
+    setIsEditModalOpen(true);
   };
 
   const handleCloseEditModal = () => {
-    setIsEditModalOpen(false); // Close the edit modal
-    setSelectedUser(null); // Clear the selected user
+    setIsEditModalOpen(false);
+    setSelectedUser(null);
   };
 
   return (
