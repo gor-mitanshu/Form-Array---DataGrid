@@ -18,6 +18,7 @@ import {
 import { Add, Delete } from "@mui/icons-material";
 import * as Yup from "yup";
 import { Field, FieldArray, Form, Formik } from "formik";
+import "./DataGrid.css";
 
 const UserModal = ({ isOpen, onClose }) => {
   const initialValues = {
@@ -27,8 +28,12 @@ const UserModal = ({ isOpen, onClose }) => {
       {
         venderName: "",
         ismain: false,
-        varient: "",
-        number: "",
+        variants: [
+          {
+            varient: "",
+            number: "",
+          },
+        ],
       },
     ],
   };
@@ -40,11 +45,15 @@ const UserModal = ({ isOpen, onClose }) => {
       Yup.object().shape({
         venderName: Yup.string().required("Vendor's Name is required"),
         ismain: Yup.boolean(),
-        varient: Yup.string().required("Variant is required"),
-        number: Yup.number()
-          .required("Number is required")
-          .positive("Number must be positive")
-          .integer("Number must be an integer"),
+        variants: Yup.array().of(
+          Yup.object().shape({
+            varient: Yup.string().required("Variant is required"),
+            number: Yup.number()
+              .required("Number is required")
+              .positive("Number must be positive")
+              .integer("Number must be an integer"),
+          })
+        ),
       })
     ),
   });
@@ -57,7 +66,7 @@ const UserModal = ({ isOpen, onClose }) => {
   return (
     <Modal
       open={isOpen}
-      onClose={onClose}
+      // onClose={onClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -95,7 +104,9 @@ const UserModal = ({ isOpen, onClose }) => {
                     name="name"
                   />
                   {touched.name && errors.name && (
-                    <div className="error">{errors.name}</div>
+                    <div className="error" style={{ color: "red" }}>
+                      {errors.name}
+                    </div>
                   )}
                 </Grid>
                 <Grid item xs={6}>
@@ -107,32 +118,35 @@ const UserModal = ({ isOpen, onClose }) => {
                     name="description"
                   />
                   {touched.description && errors.description && (
-                    <div className="error">{errors.description}</div>
+                    <div className="error" style={{ color: "red" }}>
+                      {errors.description}
+                    </div>
                   )}
                 </Grid>
                 <Grid item xs={12}>
                   <FieldArray name="vendors">
-                    {({ push, remove }) => (
+                    {({ push, remove: removeVendor }) => (
                       <div>
                         {values.vendors.map((vendor, index) => (
-                          <Box
+                          <div
                             key={index}
-                            border={1}
-                            borderRadius={2}
-                            width={"100%"}
-                            my={2}
-                            p={2}
-                            position="relative"
+                            style={{
+                              border: "1px solid",
+                              borderRadius: "5px",
+                              marginBottom: "10px",
+                              padding: "10px",
+                            }}
                           >
                             {index > 0 && (
-                              <IconButton
-                                type="button"
-                                color="primary"
-                                onClick={() => remove(index)}
-                                sx={{ position: "absolute", top: 0, right: 0 }}
-                              >
-                                <Delete />
-                              </IconButton>
+                              <Grid justifyContent={"flex-end"} container>
+                                <IconButton
+                                  type="button"
+                                  color="error"
+                                  onClick={() => removeVendor(index)}
+                                >
+                                  <Delete fontSize="large" />
+                                </IconButton>
+                              </Grid>
                             )}
                             <Grid container spacing={2}>
                               <Grid item xs={6}>
@@ -147,101 +161,196 @@ const UserModal = ({ isOpen, onClose }) => {
                                   errors.vendors &&
                                   errors.vendors[index] &&
                                   errors.vendors[index].venderName && (
-                                    <div className="error">
+                                    <div
+                                      className="error"
+                                      style={{ color: "red" }}
+                                    >
                                       {errors.vendors[index].venderName}
                                     </div>
                                   )}
                               </Grid>
-                              <Grid item xs={4}>
+                              <Grid item xs={6}>
                                 <FormControl sx={{ width: "100%" }}>
                                   <Field
                                     as={RadioGroup}
                                     name={`vendors[${index}].ismain`}
                                   >
                                     <FormControlLabel
-                                      value={true}
+                                      value={!vendor.ismain}
                                       control={<Radio />}
                                       label="Is Main"
                                     />
                                   </Field>
                                 </FormControl>
                               </Grid>
-                              <Grid item xs={4}>
-                                <FormControl sx={{ width: "100%" }}>
-                                  <InputLabel>Variant</InputLabel>
-                                  <Field
-                                    as={Select}
-                                    name={`vendors[${index}].varient`}
-                                  >
-                                    <MenuItem value={"L"}>L</MenuItem>
-                                    <MenuItem value={"XL"}>XL</MenuItem>
-                                    <MenuItem value={"XXL"}>XXL</MenuItem>
-                                  </Field>
-                                  {touched.vendors &&
-                                    touched.vendors[index] &&
-                                    touched.vendors[index].varient &&
-                                    errors.vendors &&
-                                    errors.vendors[index] &&
-                                    errors.vendors[index].varient && (
-                                      <div className="error">
-                                        {errors.vendors[index].varient}
-                                      </div>
-                                    )}
-                                </FormControl>
-                              </Grid>
-                              <Grid item xs={4}>
-                                <TextField
-                                  fullWidth
-                                  type="number"
-                                  placeholder="Number"
-                                  name={`vendors[${index}].number`}
-                                />
-                                {touched.vendors &&
-                                  touched.vendors[index] &&
-                                  touched.vendors[index].number &&
-                                  errors.vendors &&
-                                  errors.vendors[index] &&
-                                  errors.vendors[index].number && (
-                                    <div className="error">
-                                      {errors.vendors[index].number}
-                                    </div>
-                                  )}
-                              </Grid>
                             </Grid>
-                          </Box>
+                            <FieldArray name={`vendors[${index}].variants`}>
+                              {({
+                                push: pushVariant,
+                                remove: removeVariant,
+                              }) => (
+                                <div>
+                                  {vendor.variants.map((variant, vIndex) => (
+                                    <div
+                                      key={vIndex}
+                                      style={{
+                                        marginBottom: "10px",
+                                        marginTop: "10px",
+                                      }}
+                                    >
+                                      <Grid container spacing={2}>
+                                        <Grid item xs={4}>
+                                          <FormControl sx={{ width: "100%" }}>
+                                            <InputLabel>Variant</InputLabel>
+                                            <Field
+                                              as={Select}
+                                              name={`vendors[${index}].variants[${vIndex}].varient`}
+                                            >
+                                              <MenuItem value={"L"}>L</MenuItem>
+                                              <MenuItem value={"XL"}>
+                                                XL
+                                              </MenuItem>
+                                              <MenuItem value={"XXL"}>
+                                                XXL
+                                              </MenuItem>
+                                            </Field>
+                                            {touched.vendors &&
+                                              touched.vendors[index] &&
+                                              touched.vendors[index].variants &&
+                                              touched.vendors[index].variants[
+                                                vIndex
+                                              ] &&
+                                              touched.vendors[index].variants[
+                                                vIndex
+                                              ].varient &&
+                                              errors.vendors &&
+                                              errors.vendors[index] &&
+                                              errors.vendors[index].variants &&
+                                              errors.vendors[index].variants[
+                                                vIndex
+                                              ] &&
+                                              errors.vendors[index].variants[
+                                                vIndex
+                                              ].varient && (
+                                                <div
+                                                  className="error"
+                                                  style={{ color: "red" }}
+                                                >
+                                                  {
+                                                    errors.vendors[index]
+                                                      .variants[vIndex].varient
+                                                  }
+                                                </div>
+                                              )}
+                                          </FormControl>
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                          <TextField
+                                            fullWidth
+                                            type="number"
+                                            placeholder="Number"
+                                            name={`vendors[${index}].variants[${vIndex}].number`}
+                                          />
+                                          {touched.vendors &&
+                                            touched.vendors[index] &&
+                                            touched.vendors[index].variants &&
+                                            touched.vendors[index].variants[
+                                              vIndex
+                                            ] &&
+                                            touched.vendors[index].variants[
+                                              vIndex
+                                            ].number &&
+                                            errors.vendors &&
+                                            errors.vendors[index] &&
+                                            errors.vendors[index].variants &&
+                                            errors.vendors[index].variants[
+                                              vIndex
+                                            ] &&
+                                            errors.vendors[index].variants[
+                                              vIndex
+                                            ].number && (
+                                              <div
+                                                className="error"
+                                                style={{ color: "red" }}
+                                              >
+                                                {
+                                                  errors.vendors[index]
+                                                    .variants[vIndex].number
+                                                }
+                                              </div>
+                                            )}
+                                        </Grid>
+                                        <Grid item xs={4}>
+                                          {vIndex > 0 && (
+                                            <IconButton
+                                              type="button"
+                                              color="error"
+                                              onClick={() =>
+                                                removeVariant(vIndex)
+                                              }
+                                            >
+                                              <Delete fontSize="medium" />
+                                            </IconButton>
+                                          )}
+                                          <IconButton
+                                            type="button"
+                                            color="primary"
+                                            onClick={() =>
+                                              pushVariant({
+                                                varient: "",
+                                                number: "",
+                                              })
+                                            }
+                                          >
+                                            <Add />
+                                          </IconButton>
+                                        </Grid>
+                                      </Grid>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </FieldArray>
+                          </div>
                         ))}
-                        <IconButton
-                          type="button"
-                          color="primary"
-                          onClick={() =>
-                            push({
-                              venderName: "",
-                              ismain: false,
-                              varient: "",
-                              number: "",
-                            })
-                          }
-                        >
-                          <Add />
-                        </IconButton>
-                        <Grid container justifyContent={"center"}>
-                          <Button
+                        <Grid container justifyContent={"flex-end"}>
+                          <IconButton
                             type="button"
-                            variant="contained"
-                            color="error"
-                            onClick={onClose}
-                            sx={{ marginRight: "8px" }}
+                            color="primary"
+                            onClick={() =>
+                              push({
+                                venderName: "",
+                                ismain: false,
+                                variants: [
+                                  {
+                                    varient: "",
+                                    number: "",
+                                  },
+                                ],
+                              })
+                            }
                           >
-                            Cancel
-                          </Button>
-                          <Button type="submit" variant="contained">
-                            Submit
-                          </Button>
+                            <Add fontSize="large" />
+                          </IconButton>
                         </Grid>
                       </div>
                     )}
                   </FieldArray>
                 </Grid>
+              </Grid>
+              <Grid container justifyContent={"center"}>
+                <Button
+                  type="button"
+                  variant="contained"
+                  color="error"
+                  onClick={onClose}
+                  sx={{ marginRight: "8px" }}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" variant="contained">
+                  Submit
+                </Button>
               </Grid>
             </Form>
           )}
