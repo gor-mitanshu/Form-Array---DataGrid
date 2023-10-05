@@ -70,12 +70,18 @@ const DataGridComponent = ({ openModal }) => {
         fontWeight={700}
         color={"Highlight"}
         variant="h5"
-        mb={2}
+        my={2}
       >
         Website Users List
       </Typography>
       <div>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            marginBottom: "15px",
+          }}
+        >
           <Button variant="contained" onClick={openModal}>
             Add User
           </Button>
