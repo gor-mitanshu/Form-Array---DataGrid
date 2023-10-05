@@ -1,0 +1,45 @@
+.sidebar {
+  /* width: 220px !important; */
+  height: 100%;
+  background: #fff !important;
+  color: black !important;
+  position: relative !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  color: black !important;
+  border-right: 1px solid black !important;
+  border-bottom: 1px solid black !important;
+}
+.sidebar-icon {
+  color: black;
+}
+.sidebar-item {
+  padding-left: 0px !important ;
+}
+.sidebar-item:hover {
+  cursor: pointer;
+  background-color: #dad9d9;
+  color: black;
+  font-weight: 800;
+}
+/* .logout:hover {
+  cursor: pointer;
+  background-color: #ee6b6e;
+  color: black;
+  font-weight: 900;
+} */
+.sidebar-listitem-btn {
+  padding: 12px !important;
+}
+.sidebar-listitem-btn:active {
+  background: #dad9d9 !important;
+  color: black !important;
+  font-weight: 900;
+}
+.link {
+  text-decoration: none !important;
+  color: black;
+}
+.active li {
+  background: #dad9d9 !important;
+}

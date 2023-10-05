@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+/* 
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  width: 100% !important;
+}
+.css-ajtg7e-MuiGrid-root {
+  flex-direction: column !important;
+}
+.css-hlj6pa-MuiDialogActions-root {
+  justify-content: flex-start !important;
+} */
+
+.layout {
+  display: flex !important;
+  height: 100vh !important;
+  overflow: hidden; /* Add this to hide any overflowing content */
+}
+.layout-navbar {
+  /* height: 80px !important; */
+  flex-grow: 1;
+}
+.layout-sidebar {
+  /* width: 15% !important;
+  min-width: 220px !important;
+  max-width: 260px !important;
+  transition: 0.5s !important;
+  transition-timing-function: ease !important; */
+
+  width: 280px; /* Set your desired width */
+  min-width: 220px !important;
+  max-width: 260px !important;
+  transition: 0.5s !important;
+  transition-timing-function: ease !important;
+  background: #fff !important;
+  color: black !important;
+  border-right: 1px solid black !important;
+  border-bottom: 1px solid black !important;
+  overflow-y: auto; /* Add this to enable scrolling within the sidebar */
+}
+
+.layout-sidebar-sm {
+  max-width: 48px !important;
+  min-width: 48px !important;
+  transition: min-width 0.5s !important;
+  transition-timing-function: ease !important;
+  overflow: hidden !important;
+}
+@media (max-width: 600px) {
+  .layout-sidebar {
+    max-width: 48px !important;
+    min-width: 48px !important;
+  }
+}
+.outlet {
+  height: 100% !important;
+  width: 100% !important;
+  overflow: auto;
+  padding-top: 68px;
+}
